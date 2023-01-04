@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="myElement">
+        <div id="rellotge1">00:00:00</div>
+        <div id="rellotge2">00:00:00</div>
+        <div id="rellotge3">00:00:00</div>
+        <div>Lap: <span id="lapmarca"></span></div>
+        <button onclick="twiceClockStat()">Play/Pause</button>
+        <button onclick="resetAllClocks()">Reset All</button>
+
+        <button onclick="addSeconds(clock1)">Add Seconds</button>
+        <button onclick="subtractSeconds(clock1)">Substract Seconds</button>
+        <button onclick="lapTime()">Lap Time</button>
+        <script src="index.js"></script>
+    </div>
+</body>
+
+</html>
