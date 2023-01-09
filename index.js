@@ -47,7 +47,7 @@ class Clock {
         //Para si existeix un Interval
         this.atura();
         this.estat = true;
-        //La referenci es el interval
+        //La referencia es el interval
         this.ref = setInterval(() => {
             this.segon++;
             if (this.segon == 60) {
@@ -62,13 +62,13 @@ class Clock {
                 }
 
             }
-            //  document.getElementById(div).innerHTML = this.formata();
-        }, 1000);
+        }, 400);
 
     };
 
     enrere() {
         this.atura();
+        //La referencia es el interval
         this.ref = setInterval(() => {
             this.segon--;
             if (this.segon == -1) {
@@ -83,7 +83,7 @@ class Clock {
                 }
             }
             // document.getElementById(div).innerHTML = this.formata();
-        }, 1000);
+        }, 400);
     }
     atura() {
         clearInterval(this.ref);
@@ -107,23 +107,25 @@ function twiceClockStat() {
     clock1.playPause();
 }
 
-function enrererellotge() {
-    return clock2.sentit = false;
+function textCheckbox() {
+    //Si el checkbox es marcat, cap endavant
+    let checkHTML = document.getElementById("scales");
+    let textCheck = document.querySelector("label[for=scales]");
+    if (checkHTML.checked) {
+        clock1.sentit = true;
+        textCheck.innerText = "Clock1  Endevant";
+    } else {
+        clock1.sentit = false;
+        textCheck.innerText = "Clock1  Enrere";
+    }
+    // console.log("Sentit", clock1.sentit);
 }
-
-
 
 function resetAllClocks() {
     clock1 = new Clock();
     clock1.default();
     clock2 = new Clock(0, 0, 0);
-    // 'sentit' a 'false' = cap enrere 
-    clock2.sentit = false;
     clock3 = new Clock(0, 5, 0);
-}
-
-function laprellotge() {
-    clock1.lap();
 }
 
 function addSeconds(rellotgeOBJ) {
@@ -159,11 +161,10 @@ function addCero(num = 0) {
         return num.toString();
     }
 }
-
 // Crea una funcio en bucle cada segon, on kevin la mira
 let kevinVigila = setInterval(() => {
     callEverySecond();
-}, 1000);
+}, 400);
 
 
 //Primer rellotge amb l'hora actual
@@ -173,10 +174,36 @@ clock1.default();
 let clock2 = new Clock(0, 0, 0);
 //Tercer rellotge amb valors 00:05:00
 let clock3 = new Clock(0, 5, 0);
+// 'sentit' a 'false' = cap enrere 
+clock3.sentit = false;
+
+//variable per comprobar el 10 segons
+let seconds = 0;
 
 //Cada segon que es cridi la funcio, actualitza el text
 function callEverySecond() {
     document.getElementById("rellotge1").innerText = clock1.formata();
     document.getElementById("rellotge2").innerText = clock2.formata();
     document.getElementById("rellotge3").innerText = clock3.formata();
+    //Si el primer rellotge esta funcionant
+    if (clock1.estat) {
+        //Suma el segons
+        seconds++;
+        if (seconds == 10) {
+            //Quan arriba als 10 segons activa el segons rellotge
+            clock2.arrenca()
+        }
+        // Si esta funcionan el segon rellotge
+        if (clock2.estat) {
+            //I els minuts son parell pero es en pausa el rellotge3
+            if (clock2.minut % 2 == 0 & !clock3.estat) {
+                clock3.playPause();
+            }
+            //I els minuts son parell pero es en pausa el rellotge3
+            if (clock2.minut % 2 != 0 & clock3.estat) {
+                clock3.playPause();
+            }
+        }
+
+    }
 }

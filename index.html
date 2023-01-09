@@ -10,13 +10,17 @@
 
 <body>
     <div id="myElement">
+        <!-- reloj 1 -->
         <div id="rellotge1">00:00:00</div>
+        <input onchange="textCheckbox()" type="checkbox" id="scales" name="scales" checked>
+        <label for="scales">Clock1 Endevant</label>
+        <!-- reloj 2 -->
         <div id="rellotge2">00:00:00</div>
+        <!-- reloj 3 -->
         <div id="rellotge3">00:00:00</div>
         <div>Lap: <span id="lapmarca"></span></div>
         <button onclick="twiceClockStat()">Play/Pause</button>
         <button onclick="resetAllClocks()">Reset All</button>
-
         <button onclick="addSeconds(clock1)">Add Seconds</button>
         <button onclick="subtractSeconds(clock1)">Substract Seconds</button>
         <button onclick="lapTime()">Lap Time</button>
